@@ -58,7 +58,7 @@ names(FOMC.raw.trancript) <- file.list
 FOMC.raw.trancript <- FOMC.raw.trancript[3:29]
 
 # Save download transcripts as Rdata
-
+save(FOMC.raw.transcript, file = "raw.transcripts.RData")
 
 # Remove redundant files 
 rm(i, period, sc, ss, transcript, web.url, file.path, file.list, file.href)
