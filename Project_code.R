@@ -2,11 +2,9 @@ require(pdftools); require(ggplot2); require(tm); require(quanteda); require(RWe
 require(SentimentAnalysis); require(COSINE); require(lsa); require(ca); require(topicmodels); require(wordcloud)
 
 
-setwd("B:/NHH/SEM 3/DATA ANALYSIS/Applied Textual Analysis/Project")
-
 
 ###########################################################################################
-#                      TASK1 : DOWNLOAD FOMC TRANSCRIPTS                                  #
+#                              DOWNLOAD FOMC TRANSCRIPTS                                  #
 ###########################################################################################
 
 # download the source code and extract href for yearly reports
@@ -59,6 +57,9 @@ names(FOMC.raw.trancript) <- file.list
 # Keep only the 27 transcripts we need
 FOMC.raw.trancript <- FOMC.raw.trancript[3:29]
 
+# Save download transcripts as Rdata
+
+
 # Remove redundant files 
 rm(i, period, sc, ss, transcript, web.url, file.path, file.list, file.href)
 
@@ -66,7 +67,7 @@ rm(i, period, sc, ss, transcript, web.url, file.path, file.list, file.href)
 
 
 ###########################################################################################
-#                     TASK 2: STRUCTURE THE DOWNLOADED TRANSCRIPTS                        #
+#                         STRUCTURE THE DOWNLOADED TRANSCRIPTS                            #
 ###########################################################################################
 
 # load provided data 
@@ -103,7 +104,7 @@ clean.transcripts <- gsub("\\s+", " ", clean.transcripts.topic)
 
 
 ###########################################################################################
-#                               TASK 3: KEYWORD EXTRACTION                                #
+#                               KEYWORD EXTRACTION                                        #
 ###########################################################################################
 
 # Seperating into control, crisis and pre-crisis corpus 
@@ -197,7 +198,7 @@ rm(mydfm, feat, feat_split, feat_stop, use.later, freq, keywords)
 
 
 ###########################################################################################
-#                                      TASK 4: SENTIMENT                                  #
+#                                 SENTIMENT ANALYSIS                                      #
 ###########################################################################################
 
 # Create a dtm for sentiment analysis
@@ -227,7 +228,7 @@ barplot(sent, ylab = "Sentiment Score", xlab = "Date", ylim = c(0,-0.06))
 
 
 ###########################################################################################
-#                                 TASK 5:COSINE SIMILARITY                                #
+#                                      COSINE SIMILARITY                                  #
 ###########################################################################################
 
 # Collapsing each corpuses into one vector 
@@ -273,7 +274,7 @@ barplot(cos.sim.crisis[-c(1,2)], ylab = "Cosine Similarity: Crisis and Pre-Crisi
         ylim = c(0,0.5))
 
 ###########################################################################################
-#                           Task 6: CORRESPONDENCE ANALYSIS                               #
+#                                   CORRESPONDENCE ANALYSIS                               #
 ###########################################################################################
 
 # Split the pre-crisis corpus
@@ -332,7 +333,7 @@ plot3d.ca(ca(dtm.matrix), map="colprincipal",
 
 
 ###########################################################################################
-#                     Task 7: ADDITIONAL ANALYSIS - TOPIC MODEL                           #
+#                                        TOPIC MODEL                                      #
 ###########################################################################################
 
 # In this task, we use the topic model to look at the most common terms in the financial crisis. 
